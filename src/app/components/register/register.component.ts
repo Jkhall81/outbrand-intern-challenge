@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { passwordMatchValidator } from '../../shared/password-match.directive';
 
 @Component({
   selector: 'app-register',
@@ -21,15 +22,20 @@ import { NgIf } from '@angular/common';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  registerForm = this.fb.group({
-    fullName: [
-      '',
-      [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)],
-    ],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-  });
+  registerForm = this.fb.group(
+    {
+      fullName: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/)],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    },
+    {
+      validators: passwordMatchValidator,
+    }
+  );
   constructor(private fb: FormBuilder) {}
 
   get fullName() {

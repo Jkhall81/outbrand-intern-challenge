@@ -93,6 +93,12 @@
           Confirm the password.
         </div>
       </small>
+      <small
+        class="block p-error"
+        *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword.valid && password.valid"
+      >
+        Passwords should match</small
+      >
     </div>
     <!-- Button -->
 

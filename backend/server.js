@@ -27,7 +27,10 @@ app.post("/api/user/register", (req, res) => {
     email: data.email,
     password: data.password,
   };
-  usersRef
+
+  // pushing the data so i don't overwrite existing data
+  const newUsersRef = usersRef.push();
+  newUsersRef
     .set(userData)
     .then(() => {
       console.log("Data saved successfully");

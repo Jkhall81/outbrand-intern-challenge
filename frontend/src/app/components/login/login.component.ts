@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +20,11 @@ import { NgIf } from '@angular/common';
     ReactiveFormsModule,
     RouterLink,
     NgIf,
+    MessagesModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  providers: [MessageService],
 })
 export class LoginComponent {
   loginForm = this.fb.group({
@@ -27,7 +32,12 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private messageService: MessageService
+  ) {}
 
   get email() {
     return this.loginForm.controls['email'];
@@ -35,5 +45,38 @@ export class LoginComponent {
 
   get password() {
     return this.loginForm.controls['password'];
+  }
+
+  onSignIn() {
+    const email = this.loginForm.value.email as string;
+    const password = this.loginForm.value.password as string;
+
+    this.authService.signIn(email, password).subscribe(
+      (response: any) => {
+        console.log('Login successful:', response);
+        // Handle success, maybe navigate to another page
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Login Successful',
+          detail: 'User Login Successful',
+        });
+
+        // Delay redirect to home page
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 4000);
+      },
+      (error: any) => {
+        console.error('Login failed:', error);
+        // Handle error, show an error message, etc.
+
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Login Failed',
+          detail: 'Please Try Again',
+        });
+      }
+    );
   }
 }

@@ -88,6 +88,13 @@ export class RegisterComponent {
         },
         (error: any) => {
           console.error('Registration failed:', error);
+
+          // this should never display, the form has data validation, but just in case....
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Registration Failed',
+            detail: 'Please Try Again',
+          });
         }
       );
   }

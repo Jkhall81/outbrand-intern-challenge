@@ -45,10 +45,34 @@ app.post("/api/user/register", (req, res) => {
 });
 
 // User Login
-app.post("/api/user/login", (req, res) => {
+app.post("/api/user/login", async (req, res) => {
   const { email, password } = req.body;
 
-  res.json({ message: "User logged in successfully", user: { email } });
+  const usersRef = admin.database().ref("users");
+  try {
+    const snapshot = await usersRef.orderByChild("email").once("value");
+
+    let userFound = false;
+
+    snapshot.forEach((childSnapshot) => {
+      const user = childSnapshot.val();
+
+      if (user.email === email && user.password === password) {
+        userFound = true;
+      }
+    });
+
+    if (userFound) {
+      return res
+        .status(200)
+        .json({ message: "User logged in successfully", user: { email } });
+    } else {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+  } catch (error) {
+    console.error("Error checking user:", error);
+    res.status(500).json({ message: "Error checking user", error });
+  }
 });
 
 const PORT = process.env.PORT || 3000;

@@ -26,14 +26,6 @@ export const routes: Routes = [
     path: 'about-me',
     component: AboutMeComponent,
   },
-
-  // API ROUTES
-
-  {
-    path: 'api/user/register',
-    component: RegisterComponent,
-  },
-
   // REDIRECT TO HOME IF NO ROUTE
 
   {

@@ -17,6 +17,10 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'api/user/register',
+    component: RegisterComponent,
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

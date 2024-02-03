@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase Service Key
+outbrand-e10a3-firebase-adminsdk-*.json

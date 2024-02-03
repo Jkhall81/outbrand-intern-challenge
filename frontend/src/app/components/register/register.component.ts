@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { passwordMatchValidator } from '../../shared/password-match.directive';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +37,7 @@ export class RegisterComponent {
       validators: passwordMatchValidator,
     }
   );
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   get fullName() {
     return this.registerForm.controls['fullName'];
@@ -52,5 +53,21 @@ export class RegisterComponent {
 
   get confirmPassword() {
     return this.registerForm.controls['confirmPassword'];
+  }
+
+  onRegister() {
+    const registerData = this.registerForm.value;
+
+    // post request to server
+    this.http
+      .post('http://localhost:3000/api/user/register', registerData)
+      .subscribe(
+        (response: any) => {
+          console.log('Registration successful:', response);
+        },
+        (error: any) => {
+          console.error('Registration failed:', error);
+        }
+      );
   }
 }

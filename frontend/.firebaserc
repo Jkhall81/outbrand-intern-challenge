@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "outbrand-e10a3": {
+      "hosting": {
+        "outbrand-webcam": [
+          "outbrand-e10a3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "outbrand-e10a3"
+  }
+}

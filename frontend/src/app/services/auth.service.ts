@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   logout(): void {
+    localStorage.removeItem('userEmail');
     this.setAuthenticated(false);
     this.router.navigate(['/home']);
   }

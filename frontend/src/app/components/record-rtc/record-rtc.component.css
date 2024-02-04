@@ -1,0 +1,32 @@
+.custom-layout .left-column {
+  width: 25%;
+  overflow-y: auto;
+}
+
+.custom-layout .right-column {
+  flex: 1;
+  padding: 10px;
+}
+
+.custom-layout .video-list {
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.custom-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.list-item {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.list-item p-button {
+  margin-left: 10px;
+}

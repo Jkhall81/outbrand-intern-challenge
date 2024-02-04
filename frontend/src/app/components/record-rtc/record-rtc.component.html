@@ -1,19 +1,49 @@
-<p-card [style]="{ width: '760px', margin: '5rem' }">
-  <video id="video" style="width: 100%; height: 100%" autoplay></video>
-  <ng-template pTemplate="footer">
-    <p-button label="Play" icon="pi pi-play" (click)="playVideo()"></p-button>
-    <p-button
-      label="Stop"
-      icon="pi pi-stop"
-      styleClass="p-button-danger"
-      [style]="{ 'margin-left': '.5em' }"
-      (click)="stopVideo()"
-    ></p-button>
-    <p-button
-      label="Save"
-      icon="pi pi-save"
-      severity="success"
-      [style]="{ 'margin-left': '.5em' }"
-    ></p-button>
-  </ng-template>
-</p-card>
+<div class="custom-layout">
+  <div class="left-column">
+    <ng-container *ngIf="recordedBlobs.length > 0">
+      <ul class="video-list">
+        <li
+          class="list-item"
+          *ngFor="let blob of recordedBlobs; let i = index"
+          (click)="watchVideo(i + 1)"
+          pTooltip="Click to review your video"
+          tooltipPosition="top"
+        >
+          Video {{ i + 1 }}
+          <p-button
+            (click)="deleteVideo(i)"
+            size="small"
+            severity="danger"
+            label="Delete"
+          ></p-button>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+  <div class="right-column">
+    <p-card [style]="{ width: '760px', margin: '5rem' }">
+      <video id="video" style="width: 100%; height: 100%" autoplay></video>
+      <ng-template pTemplate="footer">
+        <p-button
+          label="Play"
+          icon="pi pi-play"
+          (click)="playVideo()"
+        ></p-button>
+        <p-button
+          label="Stop"
+          icon="pi pi-stop"
+          styleClass="p-button-danger"
+          [style]="{ 'margin-left': '.5em' }"
+          (click)="stopVideo()"
+        ></p-button>
+        <p-button
+          label="Save"
+          icon="pi pi-save"
+          severity="success"
+          [style]="{ 'margin-left': '.5em' }"
+          (click)="saveBlob(recordedBlobs[0])"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

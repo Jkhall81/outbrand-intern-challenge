@@ -63,6 +63,8 @@ export class LoginComponent {
           detail: 'User Login Successful',
         });
 
+        localStorage.setItem('userEmail', email);
+
         // Delay redirect to home page
         setTimeout(() => {
           this.router.navigate(['/home']);

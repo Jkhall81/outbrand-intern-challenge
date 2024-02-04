@@ -1,0 +1,11 @@
+{
+  "hosting": [
+    {
+      "target": "outbrand-webcam",
+      "source": ".",
+      "frameworksBackend": {
+        "region": "us-central1"
+      }
+    }
+  ]
+}

@@ -1,12 +1,30 @@
 <div class="dock-window">
   <p-dock [model]="items">
     <ng-template pTemplate="item" let-item>
-      <img
-        class="cursor-pointer"
-        [src]="item.icon"
-        [alt]="item.label"
-        width="100%"
-      />
+      <!-- Show these icons if the user is authenticated -->
+      <ng-container *ngIf="authService.isAuthenticatedValue">
+        <img
+          *ngIf="item.label !== 'Login' && item.label !== 'Register'"
+          class="cursor-pointer"
+          [src]="item.icon"
+          [alt]="item.label"
+          width="100%"
+        />
+      </ng-container>
+      <!-- Show these icons if the user is not authenticated -->
+      <ng-container *ngIf="!authService.isAuthenticatedValue">
+        <img
+          *ngIf="
+            item.label === 'Login' ||
+            item.label === 'Register' ||
+            item.label === 'Home'
+          "
+          class="cursor-pointer"
+          [src]="item.icon"
+          [alt]="item.label"
+          width="100%"
+        />
+      </ng-container>
     </ng-template>
   </p-dock>
 </div>

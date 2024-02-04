@@ -1,0 +1,24 @@
+*1. protect the webcam route, make the icon/link only appear after login authentication
+    A. icon // Done 12:49 PM
+    B. auth.guard // Done 1:25 PM
+
+*2. add learn more page // Done 1:56 PM
+
+*3. add about me page  // Done
+
+4. hash passwords in realtime database
+
+5. find a way to persist blobs stored in my blob array
+
+6. readme documentation
+
+7. browseranimation module error
+
+8. toast messages for video upload
+
+9. Change Favicon
+
+10. Deploy front end so there is a workable demo.
+
+11. reassess make sure everything is done
+

@@ -75,6 +75,45 @@ app.post("/api/user/login", async (req, res) => {
   }
 });
 
+// upload blob url to user object
+app.post("/api/user/blobs", async (req, res) => {
+  try {
+    const { email, downloadURL } = req.body;
+
+    const usersRef = admin.database().ref("users");
+    const snapshot = await usersRef
+      .orderByChild("email")
+      .equalTo(email)
+      .once("value");
+
+    if (snapshot.exists()) {
+      const userId = Object.keys(snapshot.val())[0];
+      const user = snapshot.val()[userId];
+
+      // get number to assign to video
+      const nextVideoNumber = user.videos
+        ? String(Object.keys(user.videos).length + 1)
+        : "1";
+
+      // update videos with new downloadURL
+      usersRef
+        .child(userId)
+        .child("videos")
+        .child(nextVideoNumber)
+        .set(downloadURL);
+
+      console.log(`Added video ${nextVideoNumber} for user ${user.fullName}`);
+      res.status(200).json({ message: "Video data received and processed" });
+    } else {
+      console.log(`User with email ${email} not found`);
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error("Error processing video data:", error);
+    res.status(500).json({ message: "Error processing video data", error });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -4,7 +4,7 @@ import { DockModule } from 'primeng/dock';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { Subscription } from 'rxjs';
+
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -17,7 +17,6 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'outbrand-webcam';
   items: MenuItem[] | undefined;
-  private authSubscription: Subscription | undefined;
 
   constructor(private router: Router, public authService: AuthService) {}
 

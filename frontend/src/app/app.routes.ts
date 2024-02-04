@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { RecordRtcComponent } from './components/record-rtc/record-rtc.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,7 @@ export const routes: Routes = [
   {
     path: 'webcam-demo',
     component: RecordRtcComponent,
+    canActivate: [authGuard],
   },
   // REDIRECT TO HOME IF NO ROUTE
 

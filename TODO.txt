@@ -6,19 +6,21 @@
 
 *3. add about me page  // Done
 
-4. hash passwords in realtime database
+*4. hash passwords in realtime database
 
-5. find a way to persist blobs stored in my blob array
+5. find a way to persist blobs stored in my blob array (bonus if i have time)
 
-6. readme documentation
+*6. readme documentation
 
 7. browseranimation module error
 
-8. toast messages for video upload
+*8. toast messages for video upload
 
-9. Change Favicon
+*9. Change Favicon
 
 10. Deploy front end so there is a workable demo.
 
-11. reassess make sure everything is done
+11. Testing
+
+12. reassess make sure everything is done
 

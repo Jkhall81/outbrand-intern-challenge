@@ -6,23 +6,32 @@ import { NgZone } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { StorageService } from '../../services/storage.service';
 import { HttpClient } from '@angular/common/http';
-
+import { MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
 import RecordRTC from 'recordrtc';
 
 @Component({
   selector: 'app-record-rtc',
   standalone: true,
-  imports: [CardModule, ButtonModule, NgIf, NgFor, TooltipModule],
+  imports: [
+    CardModule,
+    ButtonModule,
+    NgIf,
+    NgFor,
+    TooltipModule,
+    MessagesModule,
+  ],
   templateUrl: './record-rtc.component.html',
   styleUrl: './record-rtc.component.css',
-  providers: [StorageService],
+  providers: [StorageService, MessageService],
 })
 export class RecordRtcComponent {
   constructor(
     private ngZone: NgZone,
     private renderer: Renderer2,
     private storageService: StorageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService: MessageService
   ) {}
 
   videoRef: any;
@@ -105,7 +114,11 @@ export class RecordRtcComponent {
       .uploadBlob(file)
       .then((downloadURL) => {
         console.log('File uploaded, download URL:', downloadURL);
-
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Upload Complete',
+          detail: 'Video Uploaded Successfully',
+        });
         // getting email from localStorage
         const userEmail = localStorage.getItem('userEmail');
 
@@ -131,6 +144,11 @@ export class RecordRtcComponent {
       })
       .catch((error) => {
         console.log('Upload failed:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Upload Failed',
+          detail: 'Video Failed to Upload',
+        });
       });
   }
 }

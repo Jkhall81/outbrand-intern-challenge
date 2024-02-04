@@ -1,7 +1,12 @@
 <div class="dock-window">
   <p-dock [model]="items">
     <ng-template pTemplate="item" let-item>
-      <img [src]="item.icon" [alt]="item.label" width="100%" />
+      <img
+        class="cursor-pointer"
+        [src]="item.icon"
+        [alt]="item.label"
+        width="100%"
+      />
     </ng-template>
   </p-dock>
 </div>

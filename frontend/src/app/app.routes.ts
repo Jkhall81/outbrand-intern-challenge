@@ -4,6 +4,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { LearnMoreComponent } from './components/learn-more/learn-more.component';
 import { AboutMeComponent } from './components/about-me/about-me.component';
+import { RecordRtcComponent } from './components/record-rtc/record-rtc.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'about-me',
     component: AboutMeComponent,
+  },
+  {
+    path: 'webcam-demo',
+    component: RecordRtcComponent,
   },
   // REDIRECT TO HOME IF NO ROUTE
 

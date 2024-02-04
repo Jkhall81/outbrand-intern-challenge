@@ -56,6 +56,7 @@ export class LoginComponent {
         console.log('Login successful:', response);
         // Handle success, maybe navigate to another page
 
+        this.authService.setAuthenticated(true);
         this.messageService.add({
           severity: 'success',
           summary: 'Login Successful',
